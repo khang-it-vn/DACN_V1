@@ -14,6 +14,7 @@ namespace BB_V1.Data
         public DateTime ThoiGian_BD { get; set; }
 
         public DateTime ThoiGian_KT { get; set; }
+        public int? SLNguoiThamGia { get; set; }
 
         // tai khoan
         public Guid ID_TK { get; set; }

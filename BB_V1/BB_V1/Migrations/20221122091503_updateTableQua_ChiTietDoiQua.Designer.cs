@@ -4,14 +4,16 @@ using BB_V1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BB_V1.Migrations
 {
     [DbContext(typeof(DbBloodBank))]
-    partial class DbBloodBankModelSnapshot : ModelSnapshot
+    [Migration("20221122091503_updateTableQua_ChiTietDoiQua")]
+    partial class updateTableQua_ChiTietDoiQua
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

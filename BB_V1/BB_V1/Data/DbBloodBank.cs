@@ -173,13 +173,13 @@ namespace BB_V1.Data
             modelBuilder.Entity<ChiTietDiemHienMau>(ctddhm =>
             {
                 ctddhm.ToTable("ChiTietDiaDiemHienMau");
-                ctddhm.HasKey(ct => new { ct.UID, ct.ID_DC });
+                ctddhm.HasKey(ct => new { ct.UID, ct.ID_DC, ct.NgayHenHien });
 
                 //duoc dang ky boi ai
                 ctddhm.HasOne(ct => ct.NguoiHienMau)
                 .WithMany(ct => ct.ChiTietDiemHienMaus)
                 .HasForeignKey(ct => ct.UID)
-                .HasForeignKey("FK_CHITIETDIEMHIENMAU_NGUOIHIENMAU");
+                .HasConstraintName("FK_CHITIETDIEMHIENMAU_NGUOIHIENMAU");
 
                 // dang ky diem hine mau nao
                 ctddhm.HasOne(ct => ct.DiemHienMauCoDinh)
@@ -323,6 +323,45 @@ namespace BB_V1.Data
                 .HasForeignKey(c => c.ID_TK)
                 .HasConstraintName("FK_TAIKHOAN_CHTIETXUAT").OnDelete(DeleteBehavior.NoAction);
             });
+
+
+            modelBuilder.Entity<Administrator>(admin =>
+            {
+                admin.ToTable("Administrator");
+                admin.HasKey(ad => ad.ID_ADMIN);
+                admin.Property(ad => ad.HoTen).HasMaxLength(100).IsUnicode();
+                admin.Property(ad => ad.Username).HasMaxLength(150);
+                admin.Property(ad => ad.Password).HasMaxLength(150);
+                admin.Property(ad => ad.Dc).HasMaxLength(100).IsUnicode();
+
+            });
+
+            modelBuilder.Entity<Qua>(qua =>
+            {
+                qua.ToTable("Qua");
+                qua.HasKey(q => q.ID_QUA);
+                qua.Property(q => q.TenQua).HasMaxLength(50).IsUnicode();
+                qua.Property(q => q.pathHinhAnh).HasMaxLength(100);
+
+                qua.HasOne(q => q.Administrator)
+                .WithMany(q => q.Quas).HasForeignKey(q => q.ID_ADMIN).HasConstraintName("FK_ADMINISTRATOR_QUA");
+
+            });
+
+            modelBuilder.Entity<ChiTietDoiQua>(ct =>
+            {
+                ct.ToTable("ChiTietDoiQua");
+                ct.HasKey(c => new { c.UID, c.ID_QUA, c.ThoiGianDoi });
+
+                ct.HasOne(c => c.NguoiHienMau)
+                .WithMany(c => c.ChiTietDoiQuas)
+                .HasForeignKey(c => c.UID).HasConstraintName("FK_NGUOIHIENMAU_CHITIETDOIQUAS");
+
+                ct.HasOne(c => c.Qua)
+              .WithMany(c => c.ChiTietDoiQuas)
+              .HasForeignKey(c => c.ID_QUA).HasConstraintName("FK_QUA_CHITIETDOIQUAS");
+            });
+
 
 
         }

@@ -73,5 +73,41 @@ namespace BB_V1.Utils
 
             return account;
         }
+
+        public static string GenerateTokenHandler(NguoiHienMau nhm, string secretKey, string issuser)
+        {
+            var SecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
+            var Claims = new[]
+            {
+                new Claim("uid", nhm.UID.ToString()),
+                new Claim("username",nhm.Username),
+                new Claim("email",nhm.Email)
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: issuser,
+                audience: issuser,
+                Claims,
+                expires: DateTime.Now.AddDays(1),
+
+                signingCredentials: credentials
+                );
+            var encodetoken = new JwtSecurityTokenHandler().WriteToken(token);
+            return encodetoken;
+        }
+        public static NguoiHienMau FilterTokenNguoiHienMau(IIdentity identity)
+        {
+            ClaimsIdentity _identity = identity as ClaimsIdentity;
+            IList<Claim> claims = _identity.Claims.ToList();
+
+            NguoiHienMau nhm = new NguoiHienMau();
+
+            nhm.UID = new Guid(claims[0].Value);
+            nhm.Username = claims[1].Value;
+            nhm.Email = claims[2].Value;
+
+            return nhm;
+        }
     }
 }

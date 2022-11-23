@@ -18,12 +18,12 @@ namespace BB_V1.Data
         public DiemHienMauCoDinh DiemHienMauCoDinh { get; set; }
 
         // loai the tich
-        public int ID_LTT { get; set; }
+        public int? ID_LTT { get; set; }
         public LoaiTheTich LoaiTheTich { get; set; }
 
         // ket qua
 
-        public int ID_PKQ { get; set; }
+        public int? ID_PKQ { get; set; }
 
         public PhieuKetQua PhieuKetQua { get; set; }
     }

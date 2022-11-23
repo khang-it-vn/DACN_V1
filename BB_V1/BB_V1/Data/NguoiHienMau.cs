@@ -11,7 +11,11 @@ namespace BB_V1.Data
 
         public string HinhAnh { get; set; }
 
+        public int DiemHienMau { get; set; }
+
         public List<ChiTietSuKien> ChiTietSuKiens { get; set; }
         public List<ChiTietDiemHienMau> ChiTietDiemHienMaus { get; set; }
+
+        public List<ChiTietDoiQua> ChiTietDoiQuas { get; set; }
     }
 }

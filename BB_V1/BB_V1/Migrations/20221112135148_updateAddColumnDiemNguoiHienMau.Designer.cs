@@ -4,59 +4,22 @@ using BB_V1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BB_V1.Migrations
 {
     [DbContext(typeof(DbBloodBank))]
-    partial class DbBloodBankModelSnapshot : ModelSnapshot
+    [Migration("20221112135148_updateAddColumnDiemNguoiHienMau")]
+    partial class updateAddColumnDiemNguoiHienMau
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("BB_V1.Data.Administrator", b =>
-                {
-                    b.Property<int>("ID_ADMIN")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Dc")
-                        .HasMaxLength(100)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("GioiTinh")
-                        .HasColumnType("int");
-
-                    b.Property<string>("HoTen")
-                        .HasMaxLength(100)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Password")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<bool>("TrangThaiHoatDong")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Username")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("ID_ADMIN");
-
-                    b.ToTable("Administrator");
-                });
 
             modelBuilder.Entity("BB_V1.Data.BenhVien", b =>
                 {
@@ -158,30 +121,6 @@ namespace BB_V1.Migrations
                     b.HasIndex("ID_PKQ");
 
                     b.ToTable("ChiTietDiaDiemHienMau");
-                });
-
-            modelBuilder.Entity("BB_V1.Data.ChiTietDoiQua", b =>
-                {
-                    b.Property<Guid>("UID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("ID_QUA")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ThoiGianDoi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("SoDiemLucDoi")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SoLuongDoi")
-                        .HasColumnType("int");
-
-                    b.HasKey("UID", "ID_QUA", "ThoiGianDoi");
-
-                    b.HasIndex("ID_QUA");
-
-                    b.ToTable("ChiTietDoiQua");
                 });
 
             modelBuilder.Entity("BB_V1.Data.ChiTietSuDung", b =>
@@ -422,9 +361,6 @@ namespace BB_V1.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<bool>("GioiTinh")
-                        .HasColumnType("bit");
-
                     b.Property<string>("HinhAnh")
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
@@ -513,38 +449,6 @@ namespace BB_V1.Migrations
                     b.ToTable("PhieuYeuCau");
                 });
 
-            modelBuilder.Entity("BB_V1.Data.Qua", b =>
-                {
-                    b.Property<int>("ID_QUA")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Diem")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ID_ADMIN")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SoLuongTon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TenQua")
-                        .HasMaxLength(50)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("pathHinhAnh")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("ID_QUA");
-
-                    b.HasIndex("ID_ADMIN");
-
-                    b.ToTable("Qua");
-                });
-
             modelBuilder.Entity("BB_V1.Data.SuKienHienMau", b =>
                 {
                     b.Property<int>("ID_SK")
@@ -603,9 +507,6 @@ namespace BB_V1.Migrations
                     b.Property<string>("Email")
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
-
-                    b.Property<bool>("GioiTinh")
-                        .HasColumnType("bit");
 
                     b.Property<int>("ID_BV")
                         .HasColumnType("int");
@@ -695,27 +596,6 @@ namespace BB_V1.Migrations
                     b.Navigation("NguoiHienMau");
 
                     b.Navigation("PhieuKetQua");
-                });
-
-            modelBuilder.Entity("BB_V1.Data.ChiTietDoiQua", b =>
-                {
-                    b.HasOne("BB_V1.Data.Qua", "Qua")
-                        .WithMany("ChiTietDoiQuas")
-                        .HasForeignKey("ID_QUA")
-                        .HasConstraintName("FK_QUA_CHITIETDOIQUAS")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BB_V1.Data.NguoiHienMau", "NguoiHienMau")
-                        .WithMany("ChiTietDoiQuas")
-                        .HasForeignKey("UID")
-                        .HasConstraintName("FK_NGUOIHIENMAU_CHITIETDOIQUAS")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("NguoiHienMau");
-
-                    b.Navigation("Qua");
                 });
 
             modelBuilder.Entity("BB_V1.Data.ChiTietSuDung", b =>
@@ -888,18 +768,6 @@ namespace BB_V1.Migrations
                     b.Navigation("TaiKhoan");
                 });
 
-            modelBuilder.Entity("BB_V1.Data.Qua", b =>
-                {
-                    b.HasOne("BB_V1.Data.Administrator", "Administrator")
-                        .WithMany("Quas")
-                        .HasForeignKey("ID_ADMIN")
-                        .HasConstraintName("FK_ADMINISTRATOR_QUA")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Administrator");
-                });
-
             modelBuilder.Entity("BB_V1.Data.SuKienHienMau", b =>
                 {
                     b.HasOne("BB_V1.Data.TaiKhoan", "TaiKhoan")
@@ -931,11 +799,6 @@ namespace BB_V1.Migrations
                     b.Navigation("BenhVien");
 
                     b.Navigation("LoaiTaiKhoan");
-                });
-
-            modelBuilder.Entity("BB_V1.Data.Administrator", b =>
-                {
-                    b.Navigation("Quas");
                 });
 
             modelBuilder.Entity("BB_V1.Data.BenhVien", b =>
@@ -992,8 +855,6 @@ namespace BB_V1.Migrations
                 {
                     b.Navigation("ChiTietDiemHienMaus");
 
-                    b.Navigation("ChiTietDoiQuas");
-
                     b.Navigation("ChiTietSuKiens");
                 });
 
@@ -1009,11 +870,6 @@ namespace BB_V1.Migrations
             modelBuilder.Entity("BB_V1.Data.PhieuYeuCau", b =>
                 {
                     b.Navigation("ChiTietYeuCaus");
-                });
-
-            modelBuilder.Entity("BB_V1.Data.Qua", b =>
-                {
-                    b.Navigation("ChiTietDoiQuas");
                 });
 
             modelBuilder.Entity("BB_V1.Data.SuKienHienMau", b =>

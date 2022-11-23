@@ -43,7 +43,13 @@ namespace BB_V1
 
             services.AddScoped<ITaiKhoanRepository, TaiKhoanRepository>();
             services.AddScoped<ISuKienHienMauRepository, SuKienHienMauRepository>();
-
+            services.AddScoped<INguoiHienMauRepository, NguoiHienMauRepository>();
+            services.AddScoped<IChiTietSuKienRepository, ChiTietSuKienRepository>();
+            services.AddScoped<ILoaiTheTichRepository, LoaiTheTichRepository>();
+            services.AddScoped<IChiTietDiemHienMauCoDinhRepository, ChiTietDiemHienMauCoDinhRepository>();
+            services.AddScoped<IDiemHienMauCoDinhRepository, DiemHienMauCoDinhRepository>();
+            services.AddScoped<IBenhVienRepository, BenhVienRepository>();
+            services.AddScoped<IQuaRepository, QuaRepository>();
 
             services.Configure<AppSetting>(Configuration.GetSection("AppSettings"));
 

@@ -19,12 +19,12 @@ namespace BB_V1.Data
 
         // the tich dang ky
 
-        public int ID_LTT { get; set; }
+        public int? ID_LTT { get; set; }
 
         public LoaiTheTich LoaiTheTich { get; set; }
         
         // ket qua mau
-        public int ID_PKQ { get; set; }
+        public int? ID_PKQ { get; set; }
 
         public PhieuKetQua PhieuKetQua { get; set; }
     

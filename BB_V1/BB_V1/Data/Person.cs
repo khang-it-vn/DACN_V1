@@ -12,7 +12,9 @@ namespace BB_V1.Data
 
         public string Email { get; set; }
 
-        public DateTime DOB { get; set; }   
+        public DateTime DOB { get; set; } 
+        
+        public bool GioiTinh { get; set; }
 
         public String DC { get; set; }
     }
