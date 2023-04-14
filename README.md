@@ -8,8 +8,11 @@ In addition, supporting users to access blood donation events and locations more
 
 ## 1. Technology used for the project
 DATABASE: **SQL SERVER**
+
 BE: **C#**(ASP.NET CORE 5.0)
+
 FE: **JS**(REACT JS, REACT NATIVE)
+
 Authentication, authorization: **JWT**
 
 ## 2. Implementation
