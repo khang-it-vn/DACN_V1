@@ -14,7 +14,7 @@ Authentication, authorization: **JWT**
 
 ## 2. Implementation
 
-BE: [link github](https://github.com/nguyenhoangkhangithutech/DACN_V1/edit/main/README.md)
+BE (c# - asp.net core 5.0): [link github](https://github.com/nguyenhoangkhangithutech/DACN_V1/edit/main/README.md)
 
 FE:
 - Doctor (React JS): [link github](https://github.com/nguyenhoangkhangithutech/FE_BB_V1)
